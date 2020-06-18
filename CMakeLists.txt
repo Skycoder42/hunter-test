@@ -20,6 +20,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(Qt5 COMPONENTS Core Quick REQUIRED)
 find_package(jsoncpp CONFIG REQUIRED)
 
+message(STATUS "Using Qt5: ${Qt5_DIR}")
+
 if(ANDROID)
     add_library(hunter-test SHARED
       main.cpp

@@ -73,7 +73,10 @@ jobs:
         env:
           CMAKE_PREFIX_PATH: ${{steps.qt.outputs.qtdir}}
           CMAKE_FIND_ROOT_PATH: ${{steps.qt.outputs.qtdir}}
-        run: cmake -C ../caches/${{matrix.platform}}.cmake ..
-      - name: cmake
+        run: cmake -C ../caches/${{matrix.platform}}.cmake -DCMAKE_INSTALL_PREFIX=${{steps.qt.outputs.installdir}} ..
+      - name: build
         working-directory: build
         run: cmake --build .
+      - name: install
+        working-directory: build
+        run: cmake --install .
