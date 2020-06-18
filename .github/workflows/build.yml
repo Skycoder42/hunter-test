@@ -26,7 +26,7 @@ jobs:
         include:
           - platform: gcc_64
             os: ubuntu-latest
-            install: true
+            install: "true"
           - platform: android
             os: ubuntu-latest
 #          - platform: wasm_32
@@ -35,10 +35,10 @@ jobs:
 #            emsdk: 1.39.8
           - platform: msvc2019_64
             os: windows-latest
-            install: true
+            install: "true"
           - platform: msvc2019
             os: windows-latest
-            install: true
+            install: "true"
 #          - platform: winrt_x64_msvc2019
 #            os: windows-latest
 #          - platform: winrt_x86_msvc2019
@@ -47,13 +47,13 @@ jobs:
 #            os: windows-latest
           - platform: mingw81_64
             os: windows-latest
-            install: true
+            install: "true"
           - platform: mingw81_32
             os: windows-latest
-            install: true
+            install: "true"
           - platform: clang_64
             os: macos-latest
-            install: true
+            install: "true"
 #          - platform: ios
 #            os: macos-latest
 
