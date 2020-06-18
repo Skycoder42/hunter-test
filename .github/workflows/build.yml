@@ -13,41 +13,47 @@ jobs:
           - gcc_64
           - android
 #          - wasm_32
-#          - msvc2019_64
-#          - msvc2019
+          - msvc2019_64
+          - msvc2019
 #          - winrt_x64_msvc2019
 #          - winrt_x86_msvc2019
 #          - winrt_armv7_msvc2019
-#          - mingw81_64
-#          - mingw81_32
-#          - clang_64
+          - mingw81_64
+          - mingw81_32
+          - clang_64
 #          - ios
 
         include:
           - platform: gcc_64
             os: ubuntu-latest
+            install: true
           - platform: android
             os: ubuntu-latest
 #          - platform: wasm_32
 #            os: ubuntu-latest
 #            emsdk: sdk-fastcomp-1.39.8-64bit
 #            emsdk: 1.39.8
-#          - platform: msvc2019_64
-#            os: windows-latest
-#          - platform: msvc2019
-#            os: windows-latest
+          - platform: msvc2019_64
+            os: windows-latest
+            install: true
+          - platform: msvc2019
+            os: windows-latest
+            install: true
 #          - platform: winrt_x64_msvc2019
 #            os: windows-latest
 #          - platform: winrt_x86_msvc2019
 #            os: windows-latest
 #          - platform: winrt_armv7_msvc2019
-#            os: windows-2016
-#          - platform: mingw81_64
 #            os: windows-latest
-#          - platform: mingw81_32
-#            os: windows-latest
-#          - platform: clang_64
-#            os: macos-latest
+          - platform: mingw81_64
+            os: windows-latest
+            install: true
+          - platform: mingw81_32
+            os: windows-latest
+            install: true
+          - platform: clang_64
+            os: macos-latest
+            install: true
 #          - platform: ios
 #            os: macos-latest
 
@@ -77,6 +83,11 @@ jobs:
       - name: build
         working-directory: build
         run: cmake --build .
+      - name: bundle
+        if: matrix.platform == 'android'
+        working-directory: build
+        run: cmake --build . --target aab
       - name: install
+        if: matrix.install == 'true'
         working-directory: build
         run: cmake --install .

@@ -38,3 +38,7 @@ target_compile_definitions(hunter-test
   PRIVATE $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>)
 target_link_libraries(hunter-test
   PRIVATE Qt5::Core Qt5::Quick)
+
+if(NOT ANDROID)
+    install(TARGETS hunter-test)
+endif()
