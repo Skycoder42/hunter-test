@@ -48,9 +48,11 @@ jobs:
           - platform: mingw81_64
             os: windows-latest
             install: "true"
+            cmake-args: -G "MinGW Makefiles"
           - platform: mingw81_32
             os: windows-latest
             install: "true"
+            cmake-args: -G "MinGW Makefiles"
           - platform: clang_64
             os: macos-latest
             install: "true"
@@ -79,7 +81,13 @@ jobs:
         env:
           CMAKE_PREFIX_PATH: ${{steps.qt.outputs.qtdir}}
           CMAKE_FIND_ROOT_PATH: ${{steps.qt.outputs.qtdir}}
-        run: cmake -C ../caches/${{matrix.platform}}.cmake -DCMAKE_INSTALL_PREFIX=${{steps.qt.outputs.installdir}} -DCMAKE_BUILD_TYPE=Release ..
+        run: |
+          cmake \
+            -C ../caches/${{matrix.platform}}.cmake \
+            -DCMAKE_INSTALL_PREFIX=${{steps.qt.outputs.installdir}} \
+            -DCMAKE_BUILD_TYPE=Release \
+            ${{matrix.cmake-args}} \
+            ..
       - name: build
         working-directory: build
         run: cmake --build . --config Release
