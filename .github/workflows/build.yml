@@ -82,7 +82,7 @@ jobs:
         run: cmake -C ../caches/${{matrix.platform}}.cmake -DCMAKE_INSTALL_PREFIX=${{steps.qt.outputs.installdir}} -DCMAKE_BUILD_TYPE=Release ..
       - name: build
         working-directory: build
-        run: cmake --build .
+        run: cmake --build . --config Release
       - name: bundle
         if: matrix.platform == 'android'
         working-directory: build
@@ -90,4 +90,5 @@ jobs:
       - name: install
         if: matrix.install == 'true'
         working-directory: build
-        run: cmake --install .
+        run: cmake --install . --config Release
+
