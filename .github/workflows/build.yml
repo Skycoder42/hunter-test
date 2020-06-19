@@ -36,15 +36,20 @@ jobs:
           - platform: msvc2019_64
             os: windows-latest
             install: "true"
+            cmake-args: -A x64
           - platform: msvc2019
             os: windows-latest
             install: "true"
-#          - platform: winrt_x64_msvc2019
-#            os: windows-latest
-#          - platform: winrt_x86_msvc2019
-#            os: windows-latest
-#          - platform: winrt_armv7_msvc2019
-#            os: windows-latest
+            cmake-args: -A Win32
+          - platform: winrt_x64_msvc2019
+            os: windows-latest
+            cmake-args: -A x64
+          - platform: winrt_x86_msvc2019
+            os: windows-latest
+            cmake-args: -A Win32
+          - platform: winrt_armv7_msvc2019
+            os: windows-latest
+            cmake-args: -A ARM
           - platform: mingw81_64
             os: windows-latest
             install: "true"

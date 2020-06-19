@@ -1,5 +1,7 @@
 cmake_minimum_required(VERSION 3.14)
 
+# https://cmake.org/cmake/help/latest/manual/cmake-toolchains.7.html
+
 set(HUNTER_PACKAGES jsoncpp)
 
 include(FetchContent)
@@ -33,6 +35,10 @@ else()
       qml.qrc
     )
 endif()
+
+FILE(GLOB_RECURSE OTHER_FILES "caches/*")
+set(OTHER_FILES ${OTHER_FILES} ".github/workflows/build.yml")
+add_custom_target(other-files SOURCES ${OTHER_FILES})
 
 target_compile_definitions(hunter-test
   PRIVATE $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>)
