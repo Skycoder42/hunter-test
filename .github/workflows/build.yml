@@ -71,10 +71,10 @@ jobs:
           - platform: clang_64
             os: macos-latest
             install: "true"
-            cache-mode: "default"
+            cache-mode: "none"
           - platform: ios
             os: macos-latest
-            cache-mode: "default"
+            cache-mode: "none"
 
     runs-on: ${{matrix.os}}
     steps:
