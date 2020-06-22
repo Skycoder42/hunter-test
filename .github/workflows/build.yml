@@ -32,7 +32,7 @@ jobs:
           - platform: wasm_32
             os: ubuntu-latest
             emsdk: sdk-fastcomp-1.39.8-64bit
-            emsdk: 1.39.8
+#            emsdk: 1.39.8
           - platform: msvc2019_64
             os: windows-latest
             install: "true"
