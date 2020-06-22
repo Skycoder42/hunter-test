@@ -12,7 +12,7 @@ jobs:
         platform:
           - gcc_64
           - android
-#          - wasm_32
+          - wasm_32
           - msvc2019_64
           - msvc2019
           - winrt_x64_msvc2019
@@ -21,7 +21,7 @@ jobs:
           - mingw81_64
           - mingw81_32
           - clang_64
-#          - ios
+          - ios
 
         include:
           - platform: gcc_64
@@ -29,10 +29,10 @@ jobs:
             install: "true"
           - platform: android
             os: ubuntu-latest
-#          - platform: wasm_32
-#            os: ubuntu-latest
-#            emsdk: sdk-fastcomp-1.39.8-64bit
-#            emsdk: 1.39.8
+          - platform: wasm_32
+            os: ubuntu-latest
+            emsdk: sdk-fastcomp-1.39.8-64bit
+            emsdk: 1.39.8
           - platform: msvc2019_64
             os: windows-latest
             install: "true"
@@ -61,9 +61,9 @@ jobs:
           - platform: clang_64
             os: macos-latest
             install: "true"
-            cmake-args: --trace --trace-expand --debug-output
-#          - platform: ios
-#            os: macos-latest
+            cmake-args: -DHUNTER_STATUS_PRINT=ON -DHUNTER_STATUS_DEBUG=ON
+          - platform: ios
+            os: macos-latest
 
     runs-on: ${{matrix.os}}
     steps:
