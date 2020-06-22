@@ -27,42 +27,54 @@ jobs:
           - platform: gcc_64
             os: ubuntu-latest
             install: "true"
+            cache-mode: "default"
           - platform: android
             os: ubuntu-latest
+            cache-mode: "default"
           - platform: wasm_32
             os: ubuntu-latest
             emsdk: sdk-fastcomp-1.39.8-64bit
 #            emsdk: 1.39.8
+            cache-mode: "default"
           - platform: msvc2019_64
             os: windows-latest
             install: "true"
             cmake-args: -A x64
+            cache-mode: "default"
           - platform: msvc2019
             os: windows-latest
             install: "true"
             cmake-args: -A Win32
+            cache-mode: "default"
           - platform: winrt_x64_msvc2019
             os: windows-latest
             cmake-args: -A x64
+            cache-mode: "default"
           - platform: winrt_x86_msvc2019
             os: windows-latest
             cmake-args: -A Win32
+            cache-mode: "default"
           - platform: winrt_armv7_msvc2019
             os: windows-latest
             cmake-args: -A ARM
+            cache-mode: "default"
           - platform: mingw81_64
             os: windows-latest
             install: "true"
             cmake-args: -G "MinGW Makefiles"
+            cache-mode: "default"
           - platform: mingw81_32
             os: windows-latest
             install: "true"
             cmake-args: -G "MinGW Makefiles"
+            cache-mode: "default"
           - platform: clang_64
             os: macos-latest
             install: "true"
+            cache-mode: "default"
           - platform: ios
             os: macos-latest
+            cache-mode: "default"
 
     runs-on: ${{matrix.os}}
     steps:
@@ -80,6 +92,7 @@ jobs:
         with:
           version: ${{matrix.version}}
           platform: ${{matrix.platform}}
+          cache-mode: ${{matrix.cache-mode}}
       - run: mkdir build && cd build
       - name: cmake
         working-directory: build
