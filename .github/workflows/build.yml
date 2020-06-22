@@ -87,8 +87,12 @@ jobs:
           CMAKE_PREFIX_PATH: ${{steps.qt.outputs.qtdir}}
           CMAKE_FIND_ROOT_PATH: ${{steps.qt.outputs.qtdir}}
         run: cmake -C ../caches/${{matrix.platform}}.cmake -DCMAKE_INSTALL_PREFIX=${{steps.qt.outputs.installdir}} -DCMAKE_BUILD_TYPE=Release ${{matrix.cmake-args}} ..
-      - run: cat /Users/runner/runners/2.263.0/work/hunter-test/hunter-test/build/LatestGate.json
-        if: failure() && matrix.platform == 'clang_64'
+      - run: |
+          set -x
+          ls -lsa build/
+          file build/LatestGate.json
+          cat build/LatestGate.json
+        if: always() && matrix.os != 'windows-latest'
       - name: build
         working-directory: build
         run: cmake --build . --config Release
