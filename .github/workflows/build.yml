@@ -36,27 +36,28 @@ jobs:
             emsdk: sdk-fastcomp-1.39.8-64bit
 #            emsdk: 1.39.8
             cache-mode: "default"
+            emprefix: "emcmake"
           - platform: msvc2019_64
             os: windows-latest
             install: "true"
-            cmake-args: -A x64
+            cmake-args: -G "NMake Makefiles"
             cache-mode: "default"
           - platform: msvc2019
             os: windows-latest
             install: "true"
-            cmake-args: -A Win32
+            cmake-args: -G "NMake Makefiles"
             cache-mode: "default"
           - platform: winrt_x64_msvc2019
             os: windows-latest
-            cmake-args: -A x64
+            cmake-args: -G "NMake Makefiles"
             cache-mode: "default"
           - platform: winrt_x86_msvc2019
             os: windows-latest
-            cmake-args: -A Win32
+            cmake-args: -G "NMake Makefiles"
             cache-mode: "default"
           - platform: winrt_armv7_msvc2019
             os: windows-latest
-            cmake-args: -A ARM
+            cmake-args: -G "NMake Makefiles"
             cache-mode: "default"
           - platform: mingw81_64
             os: windows-latest
@@ -99,7 +100,7 @@ jobs:
         env:
           CMAKE_PREFIX_PATH: ${{steps.qt.outputs.qtdir}}
           CMAKE_FIND_ROOT_PATH: ${{steps.qt.outputs.qtdir}}
-        run: cmake -C ../caches/${{matrix.platform}}.cmake -DCMAKE_INSTALL_PREFIX=${{steps.qt.outputs.installdir}} -DCMAKE_BUILD_TYPE=Release ${{matrix.cmake-args}} ..
+        run: ${{matrix.emprefix}} cmake -C ../caches/${{matrix.platform}}.cmake -DCMAKE_INSTALL_PREFIX=${{steps.qt.outputs.installdir}} -DCMAKE_BUILD_TYPE=Release ${{matrix.cmake-args}} ..
       - run: |
           set -x
           ls -lsa build/
