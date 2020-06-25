@@ -2,11 +2,13 @@ cmake_minimum_required(VERSION 3.14)
 
 # https://cmake.org/cmake/help/latest/manual/cmake-toolchains.7.html
 
-set(HUNTER_PACKAGES jsoncpp)
+if(NOT NO_HUNTER)
+    set(HUNTER_PACKAGES jsoncpp)
 
-include(FetchContent)
-FetchContent_Declare(SetupHunter GIT_REPOSITORY https://github.com/cpp-pm/gate)
-FetchContent_MakeAvailable(SetupHunter)
+    include(FetchContent)
+    FetchContent_Declare(SetupHunter GIT_REPOSITORY https://github.com/cpp-pm/gate)
+    FetchContent_MakeAvailable(SetupHunter)
+endif()
 
 project(hunter-test LANGUAGES CXX)
 
@@ -20,7 +22,9 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(Qt5 COMPONENTS Core Quick REQUIRED)
-find_package(jsoncpp CONFIG REQUIRED)
+if(NOT NO_HUNTER)
+    find_package(jsoncpp CONFIG REQUIRED)
+endif()
 
 message(STATUS "Using Qt5: ${Qt5_DIR}")
 

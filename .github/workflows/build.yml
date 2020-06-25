@@ -33,8 +33,7 @@ jobs:
             os: ubuntu-latest
 #            emsdk: sdk-fastcomp-1.39.8-64bit
             emsdk: 1.39.8
-            emprefix1: "emconfigure"
-            emprefix2: "emmake"
+            cmake-extra-args: -DNO_HUNTER=ON
           - platform: msvc2019_64
             os: windows-latest
             install: "true"
@@ -81,7 +80,7 @@ jobs:
         env:
           CMAKE_PREFIX_PATH: ${{steps.qt.outputs.qtdir}}
           CMAKE_FIND_ROOT_PATH: ${{steps.qt.outputs.qtdir}}
-        run: cmake ${{steps.qt.outputs.cmakeArgs}} -DCMAKE_BUILD_TYPE=Release ..
+        run: cmake ${{steps.qt.outputs.cmakeArgs}} ${{matrix.cmake-extra-args}} -DCMAKE_BUILD_TYPE=Release ..
       - name: build
         working-directory: build
         run: cmake --build . --config Release
