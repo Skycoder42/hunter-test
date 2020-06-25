@@ -81,10 +81,10 @@ jobs:
         env:
           CMAKE_PREFIX_PATH: ${{steps.qt.outputs.qtdir}}
           CMAKE_FIND_ROOT_PATH: ${{steps.qt.outputs.qtdir}}
-        run: ${{matrix.emprefix1}} cmake ${{steps.qt.outputs.cmakeArgs}} -DCMAKE_BUILD_TYPE=Release ..
+        run: cmake ${{steps.qt.outputs.cmakeArgs}} -DCMAKE_BUILD_TYPE=Release ..
       - name: build
         working-directory: build
-        run: ${{matrix.emprefix2}} cmake --build . --config Release
+        run: cmake --build . --config Release
       - name: bundle
         if: matrix.platform == 'android'
         working-directory: build
@@ -92,4 +92,4 @@ jobs:
       - name: install
         if: matrix.install == 'true'
         working-directory: build
-        run: ${{matrix.emprefix2}} cmake --install . --config Release
+        run: cmake --install . --config Release
