@@ -33,7 +33,8 @@ jobs:
             os: ubuntu-latest
 #            emsdk: sdk-fastcomp-1.39.8-64bit
             emsdk: 1.39.8
-            emprefix: "emcmake"
+            emprefix1: "emconfigure"
+            emprefix2: "emmake"
           - platform: msvc2019_64
             os: windows-latest
             install: "true"
@@ -80,15 +81,15 @@ jobs:
         env:
           CMAKE_PREFIX_PATH: ${{steps.qt.outputs.qtdir}}
           CMAKE_FIND_ROOT_PATH: ${{steps.qt.outputs.qtdir}}
-        run: ${{matrix.emprefix}} cmake -DCMAKE_INSTALL_PREFIX=${{steps.qt.outputs.installdir}} -DCMAKE_BUILD_TYPE=Release ${{matrix.cmake-args}} ..
+        run: ${{matrix.emprefix1}} cmake ${{steps.qt.outputs.cmakeArgs}} -DCMAKE_BUILD_TYPE=Release ..
       - name: build
         working-directory: build
-        run: cmake --build .
+        run: ${{matrix.emprefix2}} cmake --build . --config Release
       - name: bundle
         if: matrix.platform == 'android'
         working-directory: build
-        run: cmake --build . --target aab
+        run: cmake --build . --target aab --config Release
       - name: install
         if: matrix.install == 'true'
         working-directory: build
-        run: cmake --install .
+        run: ${{matrix.emprefix2}} cmake --install . --config Release
